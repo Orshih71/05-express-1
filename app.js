@@ -9,6 +9,11 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+//config
+app.enable('case sensitive routing');
+app.enable('strict routing');
+app.disable('etag');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -19,7 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// routing
+app.get('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
